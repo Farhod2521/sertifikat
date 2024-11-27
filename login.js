@@ -2,8 +2,8 @@
 const users = [
     { id: 1, name: "Yusuf", password: "1234" },
     { id: 2, name: "Sardor", password: "1234" },
-    { id: 3, name: "Durdona", password: "1234" }
-    { id: 3, name: "Otabek", password: "1234" }
+    { id: 3, name: "Durdona", password: "1234" },
+    { id: 3, name: "Otabek", password: "1234" },
 ];
 
 document.getElementById("loginForm").addEventListener("submit", function(event) {
