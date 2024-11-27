@@ -68,12 +68,15 @@
   </style>
 </head>
 <body>
-  <div class="sidebar">
-    <h2>Admin Panel</h2>
+<div class="sidebar">
+    <h2 id="user-name">Admin Panel</h2>
+   
+   
+
     <a href="#">Material</a>
     <a href="#">Monitoring</a>
-    <a href="#">Chiqish</a>
-  </div>
+    <a href="#" id="logout-btn">Chiqish</a>
+</div>
   <div class="content">
     <div class="d-flex justify-content-between align-items-center mb-3">
       <div class="flex-grow-1 me-3">
@@ -147,6 +150,24 @@
         // Foydalanuvchi login qilgan bo'lsa, undan foydalaning
         console.log(`Xush kelibsiz, ${username}!`);
     }
+
+    
+    // Foydalanuvchi ismini chiqarish
+    const userNameElement = document.getElementById('user-name');
+    if (username) {
+        userNameElement.textContent = ` ${username}`;
+    } else {
+        userNameElement.textContent = 'Guest';
+    }
+
+    // Chiqish tugmasi bosilganda username-ni o'chirish
+    const logoutBtn = document.getElementById('logout-btn');
+    logoutBtn.addEventListener('click', () => {
+        localStorage.removeItem('username');
+        alert('You have been logged out.');
+        // Agar kerak bo'lsa, foydalanuvchini boshqa sahifaga yo'naltirish:
+        window.location.href = 'login.html';
+    });
 
     const searchInput = document.getElementById('search-input');
     const resultInfo = document.getElementById('result-info');
