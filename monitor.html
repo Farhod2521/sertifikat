@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MKINFO Statistikasi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #f5f5f5;
+        }
+        .header {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 40px;
+            font-weight: bold;
+            color: #5a67d8;
+        }
+        .info-box {
+            text-align: center;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: white;
+            transition: transform 0.2s ease-in-out;
+        }
+        .info-box:hover {
+            transform: scale(1.05);
+        }
+        .table-container {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">MKINFO</div>
+        
+        <!-- Info Boxes -->
+        <div class="row text-center">
+            <div class="col-md-4">
+                <div class="info-box">
+                    <h4>Materiallar soni</h4>
+                    <p id="material-count" style="font-size: 24px; color: #34a853;">Yuklanmoqda...</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-box">
+                    <h4>User soni</h4>
+                    <p style="font-size: 24px; color: #4285f4;">5 ta</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-box">
+                    <h4>User statistikasi</h4>
+                    <canvas id="userChart" width="100" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-container">
+            <h4 class="text-center mt-4">Ro'yxat</h4>
+            <table class="table table-striped table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th>#</th>
+                        <th>Ism</th>
+                        <th>Familiya</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Yusuf</td>
+                        <td>Aliyev</td>
+                        <td>yusuf@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Sardor</td>
+                        <td>Karimov</td>
+                        <td>sardor@gmail.com</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Otabek</td>
+                        <td>Shukurov</td>
+                        <td>otabek@gmail.com</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        // API orqali materiallar sonini yuklash
+        fetch('http://127.0.0.1:8000/materials/count/')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('material-count').textContent = `${data.total_materials} ta`;
+            })
+            .catch(error => {
+                document.getElementById('material-count').textContent = "Ma'lumot yuklanmadi!";
+                console.error('Xatolik:', error);
+            });
+
+        // Chart.js Diagram for User Statistics
+        const ctx = document.getElementById('userChart').getContext('2d');
+        new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['Yusuf', 'Sardor', 'Otabek'],
+                datasets: [{
+                    data: [5, 4, 10],
+                    backgroundColor: ['#ff6384', '#36a2eb', '#ffce56'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
