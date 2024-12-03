@@ -198,7 +198,7 @@
       }
 
 
-      const apiUrl = `https://backend.mkinfo.uz/mkinfo/search_material/?query=${encodeURIComponent(currentQuery)}&page=${currentPage}&size=${pageSize}`;
+      const apiUrl = `/mkinfo/search_material/?query=${encodeURIComponent(currentQuery)}&page=${currentPage}&size=${pageSize}`;
 
      fetch(apiUrl)
         .then(response => response.json())
@@ -338,7 +338,7 @@ document.getElementById('addMaterialForm').addEventListener('submit', async (e) 
 
     try {
 
-        const response = await fetch(`https://backend.mkinfo.uz/mkinfo/create_material_or_customer/?${params.toString()}`, {
+        const response = await fetch(`/mkinfo/create_material_or_customer/?${params.toString()}`, {
           method: 'POST', // Ensure this is 'POST'
             headers: { 'Accept': 'application/json' }, // Ensure the Accept header is set
         });
