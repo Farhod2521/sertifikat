@@ -94,7 +94,7 @@
             const loadingSpinner = document.getElementById('loading-spinner');
             
             let currentPage = 1;
-            const apiUrlBase = `https://backend.iqmath.uz/api/v1/func_teacher/openai/questions/`;
+            const apiUrlBase = `https://api.iqmath.uz/api/v1/func_teacher/openai/questions/`;
 
             function loadQuestions(page) {
                 questionsBody.innerHTML = '<tr><td colspan="3" class="text-center">Savollar yuklanmoqda...</td></tr>';
@@ -159,7 +159,7 @@
 
                 try {
                     // Misol uchun backend'dan yechimni olamiz (manzilni o'zgartiring)
-                    const response = await fetch('https://backend.iqmath.uz/api/v1/func_teacher/openai/process/', {
+                    const response = await fetch('https://api.iqmath.uz/api/v1/func_teacher/openai/process/', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ text: question.question_text_uz }),
